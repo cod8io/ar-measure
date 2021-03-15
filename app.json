@@ -1,0 +1,12 @@
+{
+  "name": "ar-measure",
+  "displayName": "ar-measure",
+  "expo": {
+    "name": "ar-measure",
+    "slug": "ar-measure",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
