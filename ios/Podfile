@@ -10,6 +10,9 @@ target 'armeasure' do
 
   use_react_native!(:path => config["reactNativePath"])
 
+  pod 'ViroReact', :path => '../node_modules/react-viro/ios/'
+  pod 'ViroKit_static_lib', :path => '../node_modules/react-viro/ios/dist/ViroRenderer/static_lib'
+
   # Uncomment the code below to enable Flipper.
   #
   # You should not install Flipper in CI environments when creating release

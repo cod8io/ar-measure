@@ -307,6 +307,9 @@ PODS:
     - UMFontInterface
   - UMSensorsInterface (5.4.0)
   - UMTaskManagerInterface (5.4.0)
+  - ViroKit_static_lib (1.0)
+  - ViroReact (1.0):
+    - React
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -367,6 +370,8 @@ DEPENDENCIES:
   - "UMReactNativeAdapter (from `../node_modules/@unimodules/react-native-adapter/ios`)"
   - UMSensorsInterface (from `../node_modules/unimodules-sensors-interface/ios`)
   - UMTaskManagerInterface (from `../node_modules/unimodules-task-manager-interface/ios`)
+  - ViroKit_static_lib (from `../node_modules/react-viro/ios/dist/ViroRenderer/static_lib`)
+  - ViroReact (from `../node_modules/react-viro/ios/`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -484,6 +489,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/unimodules-sensors-interface/ios"
   UMTaskManagerInterface:
     :path: "../node_modules/unimodules-task-manager-interface/ios"
+  ViroKit_static_lib:
+    :path: "../node_modules/react-viro/ios/dist/ViroRenderer/static_lib"
+  ViroReact:
+    :path: "../node_modules/react-viro/ios/"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -544,8 +553,10 @@ SPEC CHECKSUMS:
   UMReactNativeAdapter: 172def7895b2cb44a7dd021336e316d5fa8ea958
   UMSensorsInterface: 4df9ec662134de5614ae61acc249d6912db87ca5
   UMTaskManagerInterface: 4c60b43eaf3cb05a164bc9113258a171c18b7bf7
+  ViroKit_static_lib: 757b887d543c671838296e5ad32f75598067dcba
+  ViroReact: f4980e6b04918c4340637f9cbaae22a6bb7ea440
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
 
-PODFILE CHECKSUM: 27b8f15bccb969d1940f63e95e10d47eb4e0ed60
+PODFILE CHECKSUM: 8867f526fa5f6a61c9e7e817732e72701ac570e8
 
 COCOAPODS: 1.10.1
