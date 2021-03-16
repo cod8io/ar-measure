@@ -14,7 +14,7 @@ import { ViroARScene, ViroARSceneNavigator, ViroSphere, ViroPolyline } from 'rea
 import { useDispatch, useSelector } from 'react-redux'
 import { store } from '../store'
 import Reticle from '../components/Reticle'
-import { getFirstPoint, getReticlePoint, getSecondPoint } from '../services/selectors/ar-selector'
+import { getDistance, getFirstPoint, getReticlePoint, getSecondPoint } from '../services/selectors/ar-selector'
 import { setPoint } from '../services/actions/points-actions'
 
 const MeasureScene = () => {
@@ -62,8 +62,8 @@ const MeasureScene = () => {
 
     return (
         <ViroARScene onCameraARHitTest={onArHitResult}>
-            {firstPoint && <ViroSphere radius={0.01} position={firstPoint} />}
-            {secondPoint && <ViroSphere radius={0.01} position={secondPoint} />}
+            {firstPoint && <ViroSphere radius={0.005} position={firstPoint} />}
+            {secondPoint && <ViroSphere radius={0.005} position={secondPoint} />}
             {firstPoint && secondPoint && <ViroPolyline points={[firstPoint, secondPoint]} thickness={0.004} />}
             {firstPoint && !secondPoint && coord.length > 0 && <ViroPolyline points={[firstPoint, coord]} thickness={0.002} />}
             {coord.length > 0 && <Reticle position={coord} />}
@@ -74,20 +74,30 @@ const MeasureScene = () => {
 }
 
 const Home = () => {
-    const [isSceneOpened, setIsSceneOpened] = useState(true)
+    const [isSceneOpened, setIsSceneOpened] = useState(false)
     const dispatch = useDispatch()
+    const distance = useSelector(getDistance)
 
-    console.log(') ) ) ) ) render')
+    console.log(') ) ) ) ) render' + Math.random())
 
     return (
         <View style={styles.container}>
-            <View style={[styles.container, { backgroundColor: 'lightgray' }]}>
+            <View style={[styles.container, { backgroundColor: 'lightgray', justifyContent: 'center' }]}>
                 {isSceneOpened && <ViroARSceneNavigator initialScene={{ scene: MeasureScene }} />}
-                {!isSceneOpened && <Text>Scene not opened</Text>}
+                {!isSceneOpened && <Text style={{ alignSelf: 'center' }}>Open AR to measure distance</Text>}
+            </View>
+            <View style={styles.bottomDistanceContainer}>
+                <Text>
+                    {distance === 0
+                        ? ''
+                        : `Distance: ${Math.round(distance * 1000) / 10} cm  ||  ${
+                              Math.round(((distance * 100) / 2.54) * 10) / 10
+                          } inches`}
+                </Text>
             </View>
             <View style={styles.bottomContainer}>
                 <Button
-                    title='TOGGLE'
+                    title={isSceneOpened ? 'CLOSE' : 'OPEN AR'}
                     onPress={async () => {
                         if (isSceneOpened) {
                             setIsSceneOpened(false)
@@ -113,9 +123,10 @@ const Home = () => {
                 />
 
                 <Button
-                    title='STORE'
+                    title='RESET'
                     onPress={async () => {
-                        console.log(store.getState())
+                        dispatch(setPoint('first', undefined))
+                        dispatch(setPoint('second', undefined))
                     }}
                 />
             </View>
@@ -126,6 +137,9 @@ const Home = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1
+    },
+    bottomDistanceContainer: {
+        height: 30
     },
     bottomContainer: {
         height: 80,
